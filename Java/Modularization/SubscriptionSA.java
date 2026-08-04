@@ -7,8 +7,8 @@ public class SubscriptionSA {
 		Scanner sc = new Scanner(System.in);
 		DecimalFormat df = new DecimalFormat("# ###.00");
 		String name;
-		int age = 0, subscriptionType = 0;
-		double monthlyFee = 0, yearlyCost = 0, calculateYearlyCost;
+		int age = 0;
+		double monthlyFee = 0;
 		
 		//Prompt for user input
 		System.out.println("Please provide Name, Age, Subscription Type 1 or 2 or 3: ");
@@ -20,14 +20,14 @@ public class SubscriptionSA {
 		monthlyFee = getMonthlyFee (subscriptionType);
 		
 		//Call yearlyCost
-		yearlyCost = calculateYearlyCost (monthly);
+		yearlyCost = calculateYearlyCost (monthly)
 		
 		//Qualifies For Student Discount
 		if (qualifiesForStudentDiscount(age) == true ){
-			calculateDiscount(monthlyFee);
+			calculateDiscount(monthlyFee)
 		}
 		
-		displaySummary(name, age, getMonthlyFee, calculateDiscount,  calculateYearlyCost);
+		displaySummary(name, age, getMonthlyFee, cal);
 		
 	}
 	
@@ -41,7 +41,7 @@ public class SubscriptionSA {
 			monthlyFee = 199; 
 		} 
 		
-		return monthlyFee;
+		return MonthlyFee'
 		
 
 	}
@@ -55,7 +55,7 @@ public class SubscriptionSA {
 	}
 	
 	public static boolean qualifiesForStudentDiscount (int age){
-		//boolean isQualify = false;
+		boolean isQualify = false;
 		/*if (age >= 18 && age <= 25){
 			isQualify = true;
 		}
@@ -72,15 +72,15 @@ public class SubscriptionSA {
 		
 	}
 	
-	public static double calculateDiscount (double monthlyFee){
+	public static double calculateDiscount (double ){
 		return monthlyFee * (1 - 0.15);
 	}
 	
-	public static void displaySummary (String name, int age, double getMonthlyFee, double calculateDiscount, double calculateYearlyCost){
+	public static void displaySummary (String , int , double , double , double ){
 		System.out.println("Name: " + name);
 		System.out.println("Age: " + age);
 		System.out.println("Monthly Fee: " + getMonthlyFee);
-		System.out.println("Yearly Cost: " + calculateDiscount);
+		System.out.println("Yearly Cost: " + calculateYearlyCost);
 		System.out.println("Final Amount to Pay (Yearly): " + calculateYearlyCost);
 	}
 }
