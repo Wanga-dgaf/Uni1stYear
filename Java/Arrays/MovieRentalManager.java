@@ -38,7 +38,7 @@ public class MovieRentalManager {
         } else {
             System.out.println("Genre '" + genreName + "' not found.");
         }
-    }
+    
     }
 
     public static int findGenreIndex(String[] genres, String genreName){
