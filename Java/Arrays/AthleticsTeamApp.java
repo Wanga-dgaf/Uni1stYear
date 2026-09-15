@@ -17,14 +17,14 @@ public class AthleticsTeamApp {
 
         for (int i = 0; i < membersNames.length; i++){
             System.out.print("Enter distance ran by " + membersNames[i] + " (in kilometers): "); 
-            km = sc.nextDouble();
-            distanceRun[i] = km;
+            distanceRun[i] = sc.nextDouble();
+            
         }
 
         double average = calcAvgDistance(distanceRun);
-        double fastetstRunner = determineFastRunner(distanceRun, average);
+        int fastestRunner = determineFastRunner(distanceRun, average);
         
-        displayMemberDetails(membersNames, membersAges, distanceRun, fastetstRunner, count);
+        displayMemberDetails(membersNames, membersAges, distanceRun, average, fastestRunner);
         
 
     }
@@ -35,19 +35,20 @@ public class AthleticsTeamApp {
         for (int i = 0; i < distanceRun.length; i++){
             
             totalDistance += distanceRun[i];
-            count++;
             
         }
-        average = totalDistance/count;
+        average = totalDistance/distanceRun.length;
         return average;
     }
 
     public static int determineFastRunner(double[] distanceRun, double avgDistances){
         int count = 0;
-        avgDistances = calcAvgDistance(distanceRun);
-        for (int i = 0; i < distanceRun.length; i++){
+        //avgDistances = calcAvgDistance(distanceRun);
+        for (int i = 1; i < distanceRun.length; i++){
             
-            if (avgDistances < distanceRun[i]){} count++;
+            if (distanceRun[i] > distanceRun[count]){
+                count = i;
+            } 
             
         }
         return count;
@@ -59,6 +60,7 @@ public class AthleticsTeamApp {
         avgDistance = calcAvgDistance(distanceRun);
         System.out.println("Club members details: ");
         System.out.printf("%-15s %-10s %-10s%n","Name", "Age", "Distance");
+
         for (int i = 0; i < membersNames.length; i++){
             
             System.out.printf("%-15s %-10d %-10.1f%n",membersNames[i], membersAges[i], distanceRun[i]);
