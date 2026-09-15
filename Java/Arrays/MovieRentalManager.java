@@ -31,6 +31,7 @@ public class MovieRentalManager {
         display(genres, rentals);
     }
 
+    // Adds a specified number of rentals to a matching genre
     public static void addRentals(String[] genres, int[] rentals, String genreName, int noOfRentals){
         int index = findGenreIndex(genres, genreName);
         if (index != -1) {
@@ -41,6 +42,7 @@ public class MovieRentalManager {
     
     }
 
+    // Helper method to locate the index of a specified genre name
     public static int findGenreIndex(String[] genres, String genreName){
         for (int i = 0; i < genres.length; i++) {
             if (genres[i].equalsIgnoreCase(genreName)) {
@@ -50,6 +52,7 @@ public class MovieRentalManager {
         return -1; // Return -1 if not found
     }
 
+    // Returns the index of the genre with the highest rental count
     public static int determineHighestRentalGenre(int[] rentals){
         int maxIndex = 0;
         for (int i = 1; i < rentals.length; i++) {
@@ -60,6 +63,7 @@ public class MovieRentalManager {
         return maxIndex;
     }
 
+    // Sorts the parallel arrays in descending order based on rental counts
     public static void sortByRentalGenre(String[] genres, int[] rentals){
         for (int i = 0; i < rentals.length - 1; i++) {
             for (int j = 0; j < rentals.length - 1 - i; j++) {
@@ -78,6 +82,7 @@ public class MovieRentalManager {
         }
     }
 
+    // Displays all genres along with their rental counts
     public static void display(String[] genres, int[] rentals){
         System.out.println("----------------------------");
         System.out.printf("%-15s %-10s\n", "Genre", "Rentals");
@@ -88,6 +93,7 @@ public class MovieRentalManager {
         System.out.println("----------------------------");
     }
 
+    // Resets all rental counts to 0
     public static void resetRentals(int[] rentals){
         for (int i = 0; i < rentals.length; i++) {
             rentals[i] = 0;
