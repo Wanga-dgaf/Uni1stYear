@@ -25,6 +25,21 @@ public class AthleticsTeamApp {
         int fastestRunner = determineFastRunner(distanceRun, average);
         
         displayMemberDetails(membersNames, membersAges, distanceRun, average, fastestRunner);
+
+        //Sorted by Age
+        noBubbleSort(membersAges, membersNames);
+        System.out.println("\nSorted by Age");
+        for(int i = 0; i < membersAges.length; i++){
+            System.out.println(membersNames[i] + " - " + membersAges[i]);
+        } 
+
+        //Sort by Name
+        nameBubbleSort(membersNames, membersAges);
+        System.out.println("\nSorted by Name");
+        for(int i = 0; i < membersNames.length; i++){
+            System.out.println(membersNames[i] + " - " + membersAges[i]);
+        } 
+
         
 
     }
@@ -71,5 +86,48 @@ public class AthleticsTeamApp {
         System.out.printf("Average distance Run by Club Members: %.1f", avgDistance,  " kilometers");
         
         
+    }
+
+    public static void noBubbleSort(int[] membersAges, String[] membersNames) {
+        int tempAge = 0;
+        String  tempName = "";
+
+        for(int i = 0; i < membersAges.length; i++){
+            for (int j = 0; j < membersAges.length - 1; j++){
+                //Sorting the age
+                if(membersAges[j] > membersAges[j + 1]){
+                    //swaping age
+                    tempAge = membersAges[j];
+                    membersAges[j] = membersAges[j + 1];
+                    membersAges[j + 1] = tempAge;
+
+                    //swapping names
+                    tempName = membersNames[j];
+                    membersNames[j] = membersNames[j + 1];
+                    membersNames[j + 1] = tempName;
+
+                }
+            }
+        }
+        
+    }
+
+    public static void nameBubbleSort(String[] membersNames, int[] membersAges){
+        String tempName = "";
+        int tempAge = 0;
+
+        for(int i = 0; i < membersNames.length; i++){
+            for(int j = 0; j < membersNames.length - 1; j++){
+                if(membersNames[j].compareTo(membersNames[j + 1]) > 0){
+                    tempName = membersNames[j];
+                    membersNames[j] = membersNames[j + 1];
+                    membersNames[j + 1] = tempName;
+
+                    tempAge = membersAges[j];
+                    membersAges[j] = membersAges[j + 1];
+                    membersAges[j + 1] = tempAge;
+                }
+            }
+        }
     }
 }
