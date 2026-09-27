@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VAT Calculator</title>
+</head>
+
+<body>
+
+<h4>VAT Calculator</h4>
+
+<div class="calculator">
+
+<table>
+    <tr>
+      <td>Enter item price</td>
+       <td>
+    <input type="text" id="price">
+       </td>
+     </tr>
+    <tr>
+      <td>VAT Status</td>
+      <td>
+      <select id="vatStatus">
+       <option value="14">South Africa (14% VAT)</option>
+        <option value="17">Outside South Africa (17% VAT)</option>
+         </select>
+      </td>
+      </tr>
+      <tr>
+       <td>Total including VAT</td>
+      <td>
+        <input type="text" id="total" readonly>
+        </td>
+         </tr>
+         <tr>
+         <td></td>
+         <td>
+         <button onclick="calculateVAT()">Calculate</button>
+         </td>
+         </tr>
+        </table>
+    </div>
+
+<script src="scriptJ.js"></script>
+
+</body>
+</html>
