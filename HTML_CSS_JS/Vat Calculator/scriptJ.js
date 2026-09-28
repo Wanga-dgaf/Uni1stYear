@@ -1,17 +1,19 @@
 function calculateVAT() {
-    let price = document.getElementById("price").value;
-    let vatStatus = document.getElementById("vatStatus").value;
+    const priceInput = document.getElementById("price").value.trim();
+    const vatStatusInput = document.getElementById("vatStatus").value;
 
-    if (isNaN(price) || price == "") {
-        alert("Only Numeric Values are required for Item Price!");
+    // Validate price: must not be empty and must be a valid number
+    if (priceInput === "" || isNaN(priceInput) || parseFloat(priceInput) < 0) {
+        alert("Please enter a valid numeric item price!");
         return;
     }
 
-    price = parseFloat(price);
+    const price = parseFloat(priceInput);
+    const vatRate = parseFloat(vatStatusInput) || 0; // Fallback to 0 if empty/invalid
 
-    let vat = price * (vatStatus / 100);
+    const vat = price * (vatRate / 100);
+    const total = price + vat;
 
-    let total = price + vat;
-
-    document.getElementById("total").value = total;
+    // Display formatted to 2 decimal places
+    document.getElementById("total").value = total.toFixed(2);
 }
