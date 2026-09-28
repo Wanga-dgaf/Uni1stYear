@@ -1,6 +1,6 @@
 function calculateVAT() {
-    var price = document.getElementById("price").value;
-    var vatStatus = document.getElementById("vatStatus").value;
+    let price = document.getElementById("price").value;
+    let vatStatus = document.getElementById("vatStatus").value;
 
     if (isNaN(price) || price == "") {
         alert("Only Numeric Values are required for Item Price!");
@@ -9,9 +9,9 @@ function calculateVAT() {
 
     price = parseFloat(price);
 
-    var vat = price * (vatStatus / 100);
+    let vat = price * (vatStatus / 100);
 
-    var total = price + vat;
+    let total = price + vat;
 
     document.getElementById("total").value = total;
 }
