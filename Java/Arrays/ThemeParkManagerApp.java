@@ -16,7 +16,7 @@ public class ThemeParkManagerApp {
 
         //Variables 
         String rideName = "";
-        int i = 0;
+        
 
         populateTicketSold(ticketsSold);
 
