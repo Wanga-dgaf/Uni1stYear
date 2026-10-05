@@ -25,7 +25,7 @@ public class ThemeParkManagerApp {
         displayRidesInformation(rideNames, ticketsSold, ticketPrices, revenues);
 
         sortByTicketPrice(rideNames, ticketsSold, ticketPrices, revenues);
-
+		System.out.println("\n\nOrdered from the cheapest ticket to the most expensive");
         displayRidesInformation(rideNames, ticketsSold, ticketPrices, revenues);
 
         //prompt the user to search the ride the want
@@ -95,10 +95,10 @@ public class ThemeParkManagerApp {
     }
 
     public static void displayRidesInformation(String[] rideNames, int[] ticketsSold, double[] ticketPrices, double[] revenues) {
-        System.out.printf("%n%n%-15s %-20s %-20s %-20s", "Ride Name", "Tickets Sold", "Ticket Prices", "Revenue");
+        System.out.printf("%-15s %-20s %-20s %-20s%n", "Ride Name", "Tickets Sold", "Ticket Prices", "Revenue");
 
         for(int i = 0; i < rideNames.length; i++){
-            System.out.printf("%-15s %-20d %-20.2f %-20.2f", rideNames[i], ticketsSold[i], ticketPrices[i], revenues[i]);
+            System.out.printf("%-15s %-20d %-20.2f %-20.2f%n", rideNames[i], ticketsSold[i], ticketPrices[i], revenues[i]);
         }
     }
 }
