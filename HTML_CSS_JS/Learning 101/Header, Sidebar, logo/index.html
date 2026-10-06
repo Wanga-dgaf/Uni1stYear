@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Website</title>
+
+  <!-- Browser-tab icon: reuses the logo -->
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+
+  <!-- All styling lives in the separate stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- PAGE WRAPPER: the grid container that arranges all four sections -->
+  <div class="page">
+
+    <!-- HEADER: logo, site title and top navigation -->
+    <header class="header">
+
+      <!-- BRAND: the logo image sits right next to the site title -->
+      <a class="brand" href="#">
+        <img class="logo" src="logo.svg" alt="My Website logo">
+        <h1>My Website</h1>
+      </a>
+
+      <!-- NAVIGATION: main site links -->
+      <nav aria-label="Main">
+        <a href="#Home">Home</a>
+        <a href="#About">About</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- SIDEBAR: secondary menu; stretches down to touch the footer -->
+    <aside class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN PAGE: the primary content of the site -->
+    <main class="main">
+      <h2>Welcome</h2>
+      <p>
+        This is the main page area. The header, sidebar, main page and footer
+        each have their own colour, and the sidebar runs all the way down to
+        the footer, even when there is very little content here.
+      </p>
+
+      <!-- CARDS: example content blocks inside the main area -->
+      <div class="cards">
+        <article class="card">
+          <h3>First card</h3>
+          <p>Replace this text with your own content.</p>
+        </article>
+        <article class="card">
+          <h3>Second card</h3>
+          <p>Add as many cards as you need; they wrap automatically.</p>
+        </article>
+        <article class="card">
+          <h3>Third card</h3>
+          <p>The grid adjusts to the width of the screen.</p>
+        </article>
+      </div>
+    </main>
+
+    <!-- FOOTER: copyright and closing information -->
+    <footer class="footer">
+      <p>&copy; 2026 My Website. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
