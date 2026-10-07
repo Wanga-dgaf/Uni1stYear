@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Utilities: Clock, Stopwatch & Countdown</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 20px 30px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+    }
+    .display {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 15px 0;
+    }
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    button:hover { background-color: #2980b9; }
+    input[type="datetime-local"] {
+      padding: 8px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Live Current Date & Time Display -->
+  <div class="card">
+    <h2>Current Date & Time</h2>
+    <div id="currentDateTime" class="display">Loading...</div>
+  </div>
+
+  <!-- 2. Stopwatch Section -->
+  <div class="card">
+    <h2>Stopwatch</h2>
+    <div id="stopwatchDisplay" class="display">00:00:00.000</div>
+    <button id="startStopwatch">Start</button>
+    <button id="pauseStopwatch">Pause</button>
+    <button id="resetStopwatch">Reset</button>
+  </div>
+
+  <!-- 3. Countdown Timer (Supports Specific Target Dates) -->
+  <div class="card">
+    <h2>Date Countdown</h2>
+    <label for="targetDatetime">Choose a target date and time:</label>
+    <br/><br/>
+    <input type="datetime-local" id="targetDatetime" step="1" required />
+    <br/><br/>
+    <button id="startCountdown">Start Countdown</button>
+    <button id="stopCountdown">Stop Countdown</button>
+    <div id="countdownDisplay" class="display">Select a date & time</div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // SECTION 1: LIVE CURRENT DATE & TIME DISPLAY
+    // =========================================================================
+
+    function updateLiveClock() {
+      // Create a Date object containing the current browser date and time
+      const now = new Date();
+
+      // Format the date into a human-readable string (e.g., "Tuesday, October 6, 2026, 09:10:48 PM")
+      const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+      };
+      
+      const formattedDate = now.toLocaleDateString('en-US', options);
+
+      // Update the DOM element with the formatted current date/time string
+      document.getElementById('currentDateTime').textContent = formattedDate;
+    }
+
+    // Call updateLiveClock immediately to populate the text on page load
+    updateLiveClock();
+
+    // Set an interval to re-run updateLiveClock every 1000 milliseconds (1 second)
+    setInterval(updateLiveClock, 1000);
+
+
+    // =========================================================================
+    // SECTION 2: STOPWATCH IMPLEMENTATION
+    // =========================================================================
+
+    let stopwatchInterval = null; // Holds the reference to setInterval for stopping it
+    let stopwatchElapsedTime = 0; // Tracks total elapsed time in milliseconds
+    let stopwatchStartTime = 0;   // Stores timestamp when timer starts running
+
+    function formatStopwatchTime(ms) {
+      // Convert milliseconds into hours, minutes, seconds, and milliseconds
+      const totalSeconds = Math.floor(ms / 1000);
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      const milliseconds = ms % 1000;
+
+      // Pad numbers with leading zeros for consistent display formatting (00:00:00.000)
+      const pad = (num, digits = 2) => String(num).padStart(digits, '0');
+
+      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}`;
+    }
+
+    document.getElementById('startStopwatch').addEventListener('click', () => {
+      // Prevent multiple simultaneous intervals if 'Start' is clicked repeatedly
+      if (stopwatchInterval !== null) return;
+
+      // Calculate start time offset by any previously elapsed time
+      stopwatchStartTime = Date.now() - stopwatchElapsedTime;
+
+      // Update timer display every 10 milliseconds (~100 fps)
+      stopwatchInterval = setInterval(() => {
+        stopwatchElapsedTime = Date.now() - stopwatchStartTime;
+        document.getElementById('stopwatchDisplay').textContent = formatStopwatchTime(stopwatchElapsedTime);
+      }, 10);
+    });
+
+    document.getElementById('pauseStopwatch').addEventListener('click', () => {
+      // Stop the timer updates by clearing the interval variable
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = null; // Reset reference
+    });
+
+    document.getElementById('resetStopwatch').addEventListener('click', () => {
+      // Stop the timer and reset all tracked variables back to zero
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = null;
+      stopwatchElapsedTime = 0;
+      document.getElementById('stopwatchDisplay').textContent = "00:00:00.000";
+    });
+
+
+    // =========================================================================
+    // SECTION 3: COUNTDOWN TIMER WITH TARGET DATES
+    // =========================================================================
+
+    let countdownInterval = null; // Holds reference to the countdown interval loop
+
+    document.getElementById('startCountdown').addEventListener('click', () => {
+      // Retrieve the value selected by the user in the <input type="datetime-local"> field
+      const inputVal = document.getElementById('targetDatetime').value;
+      const display = document.getElementById('countdownDisplay');
+
+      // Validate that the user picked a valid date/time
+      if (!inputVal) {
+        display.textContent = "Please pick a target date!";
+        return;
+      }
+
+      // Convert target input string into milliseconds epoch time
+      const targetTime = new Date(inputVal).getTime();
+
+      // Clear any existing active countdowns before launching a new one
+      clearInterval(countdownInterval);
+
+      // Define the updater function to execute every second
+      function updateCountdown() {
+        const currentTime = Date.now();
+        const difference = targetTime - currentTime; // Remaining time in milliseconds
+
+        // If target date has been reached or passed
+        if (difference <= 0) {
+          clearInterval(countdownInterval);
+          display.textContent = "🎉 Time's Up!";
+          return;
+        }
+
+        // Convert remaining milliseconds into Days, Hours, Minutes, and Seconds
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        // Display the remaining time formatted clearly to the user
+        display.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      // Run updateCountdown immediately on click
+      updateCountdown();
+
+      // Repeat the calculation every 1000 milliseconds (1 second)
+      countdownInterval = setInterval(updateCountdown, 1000);
+    });
+
+    document.getElementById('stopCountdown').addEventListener('click', () => {
+      // Stop the countdown timer loop and inform the user
+      clearInterval(countdownInterval);
+      document.getElementById('countdownDisplay').textContent = "Countdown Stopped";
+    });
+  </script>
+
+</body>
+</html>

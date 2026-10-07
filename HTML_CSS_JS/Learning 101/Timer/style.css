@@ -1,0 +1,57 @@
+/* Center the whole page content vertically and horizontally */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Styles the main timer card container */
+.timer-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* Styles the heading text */
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Makes the timer display look large and bold */
+#display {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Sets the same styling for all control buttons */
+.controls button {
+    padding: 10px 18px;
+    font-size: 1rem;
+    margin: 0 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Start button is green to show begin action */
+#startBtn { background-color: #2ecc71; color: white; }
+#startBtn:hover { background-color: #27ae60; }
+
+/* Pause button is yellow to show temporary stop */
+#pauseBtn { background-color: #f1c40f; color: white; }
+#pauseBtn:hover { background-color: #f39c12; }
+
+/* Reset button is red to show restart action */
+#resetBtn { background-color: #e74c3c; color: white; }
+#resetBtn:hover { background-color: #c0392b; }
