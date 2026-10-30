@@ -9,14 +9,14 @@ function calculateOrder() {
     const notebooks = Number(document.getElementById("notebooks").value) || 0;
     const pens = Number(document.getElementById("pens").value) || 0;
     const output = (document.getElementById("output"));
-    
-    if (notebooks < 0 || pens < 0){
+
+    if (notebooks < 0 || pens < 0) {
         output.innerHTML = "Quantities cannot be less than 0";
         //alert (Quantities cannot be less than 0");
         return;
     }
 
-    if (notebooks + pens === 0){
+    if (notebooks + pens === 0) {
         output.innerHTML = "Please order atleast one item";
         return;
     }
