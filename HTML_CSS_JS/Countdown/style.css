@@ -1,0 +1,40 @@
+.container {
+    width: 400px;
+    height: 400px;
+    background-color: grey;
+  
+
+    display: flex;
+    flex-direction: column; /* Places items vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px;
+    
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.countdown-timer-values {
+    padding: 0px;
+    gap: 0px;
+    display: flex;
+    flex-direction: row; /* Places items horizontally */
+
+}
+
+footer {
+    display: flex;
+    flex-direction: row; /* Places items horizontally */
+}
+
+.icons {
+    align-content: right;
+}

@@ -11,10 +11,9 @@ function updateTimer(){
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000  * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / (1000));
 
-    document.getElementById("days").textContent = days + "d";
-    document.getElementById("hours").textContent = hours + "h";
-    document.getElementById("minutes").textContent = minutes + "m";
-    document.getElementById("seconds").textContent = seconds + "s";
+    const countdownTimer = document.getElementById("countdown-timer").innerHTML;
+    
+    countdownTimer = '{days}, \t, {hours}{minutes}{seconds}'
 
 }
 
