@@ -11,9 +11,9 @@ function updateTimer(){
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000  * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / (1000));
 
-    const countdownTimer = document.getElementById("countdown-timer").innerHTML;
+    const countdownTimer = document.getElementById("countdown-timer").textContent;
     
-    countdownTimer = '{days}, \t, {hours}{minutes}{seconds}'
+    countdownTimer = '${days}, \t, ${hours}#{minutes}${seconds}'
 
 }
 
